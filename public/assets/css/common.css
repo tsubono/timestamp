@@ -1,0 +1,50 @@
+.modal-content {
+  border: 5px solid #333;
+  min-height: 300px; }
+  .modal-content .loading {
+    margin-top: 110px; }
+
+#statusModal .controlHeader {
+  margin: 3em 1em;
+  text-align: left;
+  height: 6em;
+  border-bottom: solid 3px #00B8EE; }
+  #statusModal .controlHeader ul li {
+    display: inline-block; }
+  #statusModal .controlHeader button[type=submit] {
+    border: none;
+    background: transparent; }
+#statusModal .modalBody {
+  margin-bottom: 4em; }
+  #statusModal .modalBody .profile img {
+    display: block;
+    margin-top: 2em;
+    /*width: 50%;*/
+    margin-left: auto;
+    margin-right: auto; }
+  #statusModal .modalBody .textLabel {
+    font-size: 2em;
+    font-weight: bold;
+    letter-spacing: 5px; }
+  #statusModal .modalBody .statusText img {
+    vertical-align: top;
+    height: 2.5em; }
+  #statusModal .modalBody .title {
+    font-size: 1.5em;
+    margin: 1em 0; }
+  #statusModal .modalBody .timecard {
+    font-size: 1.5em;
+    border-bottom: 1px solid gray;
+    padding: 0.5em 0; }
+#statusModal .modalBody .timecardListUnit .container-fluid {
+  height: 15em;
+  overflow: scroll; }
+#statusModal .modalBody .timecardDetailUnit .container-fluid {
+  height: 15em;
+  overflow: scroll; }
+#statusModal .modalBody .timecardDetailUnit .control {
+  padding: 1em 0; }
+  #statusModal .modalBody .timecardDetailUnit .control a {
+    text-decoration: none; }
+
+/*# sourceMappingURL=common.css.map */

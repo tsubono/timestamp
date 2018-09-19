@@ -1,0 +1,169 @@
+@charset "utf-8";
+html {
+    font-size: 62.5%; /*10px*/
+}
+
+/*  link */
+a {
+    color: #326598;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+a:visited {
+    color: #326598;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #326598;
+    text-decoration: none;
+}
+
+a:hover img.wink {
+    filter: alpha(opacity=75);
+    -moz-opacity: 0.75;
+    opacity: 0.75;
+}
+
+/*iFreamArea*/
+.btnArea {
+    padding: 30px 0 30px 0;
+    border-bottom: 2px solid #00b8ee;
+    height: 58px;
+}
+
+.btnArea > ul {
+    width: 510px;
+    margin: 0 auto;
+}
+
+.btnArea > ul > li {
+    width: 120px;
+    height: 58px;
+    float: left;
+    margin: 0 10px 0 0;
+}
+
+.btnArea > ul > li:last-child {
+    margin-right: 0;
+}
+
+.dakoku .left {
+    border-right: solid 2px #00b8ee;
+    width: 372px;
+    height: 300px;
+    float: left;
+}
+
+.dakoku p.name {
+    width: 180px;
+    font-size: 26px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin: 0 0 15px 15px;
+    padding: 30px 0 0 0;
+}
+
+.dakoku .leftIn {
+    /*width:340px;*/
+    padding: 0 0 0 15px;
+}
+
+.dakoku .leftIn div p {
+    float: left;
+    width: 180px;
+}
+
+.dakoku .leftIn div p img {
+    width: 180px;
+}
+
+.dakoku .leftIn dl {
+    width: 150px;
+    float: right;
+    position: relative;
+    top: 40px;
+    margin-right: 12px;
+}
+
+.dakoku .leftIn dt {
+    font-size: 21px;
+    letter-spacing: 4px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.dakoku .right {
+    width: 230px;
+    margin: 18px 25px 0 0;
+    float: right;
+    /*background:#CC3;
+    */
+}
+
+.dakoku .right .dakokuIn {
+    height: 230px;
+    margin-bottom: 11px;
+    text-align: center;
+}
+
+.dakoku .right .dakokuIn ul {
+    text-align: left;
+    width: 230px;
+    height: 220px;
+    margin-left: 3px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.dakoku .right .dakokuIn ul li {
+    border-bottom: dotted 1px #221814;
+    font-size: 120%;
+}
+
+.dakoku .right .dakokuIn ul li a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+.dakoku .right .dakokuIn ul li a:hover {
+    background: #F4F4F4;
+}
+
+.right img {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.dakokuIn table {
+    width: 100%;
+    border-bottom: #00b8ee solid 2px;
+}
+
+.dakokuIn td {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.dakokuIn td span {
+    background: #F2F2F2;
+    color: #00b8ee;
+    padding: 3px 5px;
+    display: block;
+}
+
+.dakokuIn td span a {
+    color: #00b8ee;
+    text-decoration: none;
+    display: block;
+}
+
+.dakokuIn td.date {
+    padding: 0 10px;
+    color: #00b8ee;
+    white-space: nowrap;
+    font-size: 120%;
+}

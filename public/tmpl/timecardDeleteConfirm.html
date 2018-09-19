@@ -1,0 +1,15 @@
+<div class="modal-header">
+  <h4 class="modal-title">タイムカードの削除リクエスト</h4>
+</div>
+<div class="modal-body">
+  <p class="text-danger">
+    タイムカードの削除申請を行います。本当によろしいですか？
+  </p>
+</div>
+<div class="modal-footer">
+  <input type="hidden" ng-model=date" value="{{records.date}}">
+  <input type="hidden" ng-model=euid" value="{{records.euid}}">
+  <button type="button" class="btn btn-default" ng-click="close()">キャンセル</button>
+  <button type="button" class="btn btn-primary" ng-click="submit()">削除依頼を送信</button>
+</div>
+

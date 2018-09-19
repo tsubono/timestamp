@@ -1,0 +1,116 @@
+<div class="modal-header" ng-init="getTimecardForEdit()">
+  <h4 class="modal-title">タイムカードの変更/追加依頼</h4>
+</div>
+<div class="modal-body">
+  <p class="text-danger" ng-show="error">変更依頼を送信できませんでした。</p>
+  <alert ng-show="alert" type="{{alert.type}}" style="color: red;">{{alert.msg}}</alert>
+  <table class="table table-bordered" ng-repeat="(timecardIndex, timecard) in timecards">
+    <thead>
+    <tr>
+      <th style="width: 100px; text-align: right;background: #f8fafb;">出勤</th>
+      <td style="background: #f8fafb;">
+        <div class="dropdown">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="timecard.startTime" data-modelType="Y-m-d">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker  data-before-render="beforeRender($view, $dates, $leftDate, $upDate, $rightDate)" data-ng-model="timecard.startTime" data-datetimepicker-config="{'modelType':'YYYY-MM-DD HH:mm'}"/>
+          </ul>
+        </div>
+      </td>
+      <td style="width: 100px;background: #f8fafb;">
+        <button type="button" ng-click="removeTimecard(timecardIndex)" style="font-size: 0.9em;"
+                ng-if="timecards.length > 1" class="btn btn-default btn-block">
+          &times;出勤を削除
+        </button>
+      </td>
+    </tr>
+    </thead>
+    <tbody ng-repeat="(restIndex, rest) in timecard.rests">
+    <tr ng-if="rest.startTime !=''">
+      <th style="width: 100px; text-align: right;">休憩入り</th>
+      <td>
+        <div class="dropdown">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="rest.startTime">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="rest.startTime" data-datetimepicker-config="{'modelType':'YYYY-MM-DD HH:mm'}"/>
+          </ul>
+        </div>
+      </td>
+      <td rowspan="2" style="width: 100px;">
+        <button type="button" ng-click="removeRest(timecardIndex, restIndex)" style="font-size: 0.9em;"
+                class="btn btn-default btn-block">
+          &times;休憩を削除
+        </button>
+      </td>
+    </tr>
+    <tr ng-if="rest.startTime !=''">
+      <th style="width: 100px; text-align: right;">休憩戻り</th>
+      <td>
+        <div class="dropdown">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="rest.endTime">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="rest.endTime" data-datetimepicker-config="{'modelType':'YYYY-MM-DD HH:mm'}"/>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <th style="width: 100px; text-align: right;"></th>
+      <td>
+        <button type="button" ng-click="addRest(timecardIndex)" style="font-size: 0.9em;"
+                class="btn btn-default btn-block">
+          ＋休憩を追加
+        </button>
+      </td>
+      <td style="width: 100px;"></td>
+    </tr>
+    <tr>
+      <th style="width: 100px; text-align: right;">退勤</th>
+      <td>
+        <div class="dropdown">
+          <a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
+            <div class="input-group">
+              <input type="text" class="form-control" data-ng-model="timecard.endTime" data-modelType="Y-m-d">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <datetimepicker data-ng-model="timecard.endTime" data-datetimepicker-config="{'modelType':'YYYY-MM-DD HH:mm'}"/>
+          </ul>
+        </div>
+      </td>
+      <td style="width: 100px;"></td>
+    </tr>
+    <tr ng-if="$last">
+      <th style="width: 100px; text-align: right;"></th>
+      <td>
+        <button type="button" ng-click="addTimecard()" style="font-size: 0.9em;"
+                class="btn btn-default btn-block">
+          ＋出勤を追加
+        </button>
+      </td>
+      <td style="width: 100px;"></td>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="submit()">依頼送信</button>
+</div>
+

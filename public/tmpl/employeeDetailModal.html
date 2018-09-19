@@ -1,0 +1,130 @@
+<div ng-init="getEmployeeDetail()" ng-show="resolving">
+  <img class="loading" src="/assets/img/loading.gif" alt=""/>
+</div>
+
+<div ng-show="!resolving" id="statusModal">
+  <div class="controlHeader container-fluid">
+    <p class="text-right">
+      <span ng-click="close()">閉じる</span>
+    </p>
+    <ul>
+      <li ng-show="control.clocking_in">
+        <form action="{{ update_url }}" method="post" accept-charset="UTF-8">
+          <input name="_token" type="hidden" value="{{ token }}">
+          <input name="control_id" type="hidden" value="0">
+          <input name="timecard_id" type="hidden" value="{{ timecard_id }}">
+          <input name="employee_uid" type="hidden" value="{{ employee_uid }}">
+          <button type="submit"><img src="/dakoku/images/btn_01.png" alt="出勤" class="wink"></button>
+        </form>
+      </li>
+      <li ng-show="control.break_in">
+        <form action="{{ update_url }}" method="post" accept-charset="UTF-8">
+          <input name="_token" type="hidden" value="{{ token }}">
+          <input name="control_id" type="hidden" value="1">
+          <input name="timecard_id" type="hidden" value="{{ timecard_id }}">
+          <input name="employee_uid" type="hidden" value="{{ employee_uid }}">
+          <button type="submit"><img src="/dakoku/images/btn_02.png" alt="休憩" class="wink"></button>
+        </form>
+      </li>
+      <li ng-show="control.break_out">
+        <form action="{{ update_url }}" method="post" accept-charset="UTF-8">
+          <input name="_token" type="hidden" value="{{ token }}">
+          <input name="control_id" type="hidden" value="2">
+          <input name="timecard_id" type="hidden" value="{{ timecard_id }}">
+          <input name="employee_uid" type="hidden" value="{{ employee_uid }}">
+          <button type="submit"><img src="/dakoku/images/btn_03.png" alt="復帰" class="wink"></button>
+        </form>
+      </li>
+      <li ng-show="control.clocking_out">
+        <form action="{{ update_url }}" method="post" accept-charset="UTF-8">
+          <input name="_token" type="hidden" value="{{ token }}">
+          <input name="control_id" type="hidden" value="3">
+          <input name="timecard_id" type="hidden" value="{{ timecard_id }}">
+          <input name="employee_uid" type="hidden" value="{{ employee_uid }}">
+          <button type="submit"><img src="/dakoku/images/btn_04.png" alt="退勤" class="wink"></button>
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container-fluid modalBody">
+    <div class="row">
+      <div class="col-sm-5 profile">
+        <p class="name textLabel">{{ employee['name'] }}</p>
+
+        <p><img ng-src="{{ employee['icon'] }}" alt="{{ employee['name'] }}"/></p>
+
+      </div>
+      <div class="col-sm-7">
+        <p class="statusText text-left">
+          <span class="textLabel">現在</span>
+          <img ng-show="employee['status'] == '出勤中' || employee['status'] == '休憩中'" src="/dakoku/images/GUI-PC_29.png" alt="勤務中" class="wink"/>
+          <img ng-show="employee['status'] != '出勤中' && employee['status'] != '休憩中'" src="/dakoku/images/GUI-PC_03.png" alt="待機中" class="wink"/>
+        </p>
+
+
+        <div class="timecardListUnit" ng-show="!detail">
+
+          <p class="title text-left">{{year}}年 {{month}}月 の出勤記録</p>
+
+          <div>
+            <a class="btn btn-small btn-default" ng-click="prevMonth()">前の月を表示</a>
+            <a class="btn btn-small btn-default" ng-click="nextMonth()">次の月を表示</a>
+          </div>
+
+          <div class="container-fluid">
+            <div class="row timecard" ng-click="setDetail(date, employee['uid'], detail['add_request_flg'])" ng-repeat="(date,detail) in dateList">
+              <div class="clear-fix">
+                <div class="col-xs-9">
+                  <p class="text-left">
+                    {{date}}
+                    <span ng-if="detail.clock_in">{{getTime(detail.clock_in)}} - {{getTime(detail.clock_out)}}</span>
+                  </p>
+                </div>
+                <div class="col-xs-3">
+                  <p class="text-right">
+                    詳細
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--詳細画面-->
+        <div class="timecardDetailUnit" ng-show="detail">
+          <p class="title text-left">{{detail.date}}の勤務記録</p>
+
+          <div class="container-fluid" ng-show="detail.records">
+            <div class="row timecard" ng-repeat="record in detail.records">
+              <p class="text-left">
+                {{getLabel(record.type)}}
+                {{getTime(record.time)}}
+              </p>
+
+            </div>
+          </div>
+
+          <div ng-show="!detail.records">
+            <p class="title" style="padding:1em 0">出勤情報はありません。</p>
+          </div>
+
+          <p class="control" ng-show="!detail.records">
+            <a class="btn btn-default" ng-click="detail=null">戻る</a>
+            <a class="btn btn-default requestBtn" ng-show="!detail.add_request_flg" ng-click="sendAddRequest(detail.date, employee['uid'])">追加依頼</a>
+          </p>
+          <p class="control" ng-show="detail.records">
+            <a class="btn btn-default" ng-click="detail=null">戻る</a>
+            <a ng-show="!detail.change_request_flg && detail.clock_out_flg" class="btn btn-primary requestBtn" ng-click="sendUpdateRequest(detail.date, employee['uid'])">変更依頼</a>
+          <!--<a ng-show="detail.change_request_flg" class="btn btn-danger" ng-click="sendDeleteRequest()">削除依頼</a>-->
+          </p>
+
+          <p style="color: red;" ng-show="detail.change_request_flg || detail.add_request_flg">追加/変更依頼中</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
